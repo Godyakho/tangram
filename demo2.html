@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#canvas{
+			border: 1px solid #eeeeee;
+			margin: 100px auto;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+</body>
+<script type="text/javascript">
+	window.onload = function() {
+
+		var canvas = document.getElementById('canvas');
+		canvas.width = 500;
+		canvas.height = 500;
+		var context = canvas.getContext('2d');
+
+		tar = [
+			{
+				tar:[{x:250,y:250},{x:500,y:0},{x:500,y:500},{color: 'red'}]
+			},
+			{
+				tar:[{x:0,y:0},{x:500,y:0},{x:250,y:250},{color: 'blue'}]
+			},
+			{
+				tar:[{x:0,y:0},{x:125,y:125},{x:125,y:375},{x:0,y:250},{color: 'green'}]
+			},
+			{
+				tar:[{x:0,y:250},{x:250,y:500},{x:0,y:500},{color:'yellow'}]
+			},
+			{
+				tar:[{x:125,y:125},{x:250,y:250},{x:125,y:375},{color: 'purple'}]
+			},
+			{
+				tar:[{x:125,y:375},{x:250,y:250},{x:375,y:375},{x:250,y:500},{color: 'grey'}]
+			},
+			{
+				tar:[{x:250,y:500},{x:375,y:375},{x:500,y:500},{color: 'orange'}]
+			}
+		]	 
+
+		tar.map(function(tar){
+			draw(tar,context)
+		})
+
+		function draw(_tar,context) {
+			context.beginPath()
+			_tar.tar.forEach(function(item,index){
+
+				if(index>0){
+					context.lineTo(item.x,item.y)
+					context.fillStyle = item.color;
+				}else{
+					context.moveTo(item.x,item.y)
+				}
+				
+			})
+			context.fill()
+		}
+	}
+
+
+
+</script>
+</html>
