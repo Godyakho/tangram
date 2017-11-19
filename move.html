@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>move</title>
+	<style type="text/css">
+		#canvas{
+			border: 1px solid  black;
+			margin: 100px auto;
+			display: block;
+		}
+		</style>
+</head>
+<body>
+	<canvas id = "canvas"></canvas>
+</body>
+<script type="text/javascript">
+	window.onload = function(){
+		var canvas = document.getElementById('canvas')
+		var cxt = canvas.getContext('2d')
+		canvas.width = 1024
+		canvas.height = 768
+
+		var ball ={
+			x:600,
+			y:50,
+			vx:-10,
+			vy:0,
+			g:10,
+			radius:20,
+		}
+
+		setInterval(function(){
+			render(cxt)
+			updata()
+		},50)
+
+		function updata(){
+			ball.x += ball.vx 
+			ball.y += ball.vy
+			ball.vy+= ball.g
+		}
+
+		function render(cxt) {
+		cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height)
+		cxt.beginPath() 
+		cxt.fillStyle = "black"
+		console.log(ball.vy)
+		if(ball.y >= 768  - ball.radius){
+			ball.y =768 - ball.radius
+			ball.vy= -ball.vy*0.5
+		}
+
+		cxt.arc(ball.x,ball.y,ball.radius,0,2*Math.PI,false)
+		cxt.closePath()
+		cxt.fill()
+	}
+	}
+
+
+
+	
+</script>
+</html>
